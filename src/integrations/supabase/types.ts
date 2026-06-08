@@ -14,16 +14,495 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_agents: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          last_run_at: string | null
+          name: string
+          runs_today: number
+          status: string
+          success_rate: number
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_run_at?: string | null
+          name: string
+          runs_today?: number
+          status?: string
+          success_rate?: number
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_run_at?: string | null
+          name?: string
+          runs_today?: number
+          status?: string
+          success_rate?: number
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ai_events: {
+        Row: {
+          action: string
+          agent_id: string | null
+          created_at: string
+          id: string
+          payload: Json | null
+          severity: string
+          summary: string | null
+        }
+        Insert: {
+          action: string
+          agent_id?: string | null
+          created_at?: string
+          id?: string
+          payload?: Json | null
+          severity?: string
+          summary?: string | null
+        }
+        Update: {
+          action?: string
+          agent_id?: string | null
+          created_at?: string
+          id?: string
+          payload?: Json | null
+          severity?: string
+          summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_events_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "ai_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deliveries: {
+        Row: {
+          co2_kg: number | null
+          cost_usd: number | null
+          created_at: string
+          customer_name: string
+          customer_phone: string | null
+          delivered_at: string | null
+          dest_address: string
+          dest_city: string | null
+          dest_lat: number | null
+          dest_lng: number | null
+          eta: string | null
+          id: string
+          origin_warehouse_id: string | null
+          priority: string
+          scheduled_for: string | null
+          status: string
+          tracking_no: string
+          updated_at: string
+          vehicle_id: string | null
+          weight_kg: number
+        }
+        Insert: {
+          co2_kg?: number | null
+          cost_usd?: number | null
+          created_at?: string
+          customer_name: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          dest_address: string
+          dest_city?: string | null
+          dest_lat?: number | null
+          dest_lng?: number | null
+          eta?: string | null
+          id?: string
+          origin_warehouse_id?: string | null
+          priority?: string
+          scheduled_for?: string | null
+          status?: string
+          tracking_no: string
+          updated_at?: string
+          vehicle_id?: string | null
+          weight_kg?: number
+        }
+        Update: {
+          co2_kg?: number | null
+          cost_usd?: number | null
+          created_at?: string
+          customer_name?: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          dest_address?: string
+          dest_city?: string | null
+          dest_lat?: number | null
+          dest_lng?: number | null
+          eta?: string | null
+          id?: string
+          origin_warehouse_id?: string | null
+          priority?: string
+          scheduled_for?: string | null
+          status?: string
+          tracking_no?: string
+          updated_at?: string
+          vehicle_id?: string | null
+          weight_kg?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliveries_origin_warehouse_id_fkey"
+            columns: ["origin_warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliveries_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      drivers: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          license_no: string | null
+          phone: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id?: string
+          license_no?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          license_no?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      route_stops: {
+        Row: {
+          arrival_eta: string | null
+          created_at: string
+          delivery_id: string | null
+          id: string
+          route_id: string
+          sequence: number
+        }
+        Insert: {
+          arrival_eta?: string | null
+          created_at?: string
+          delivery_id?: string | null
+          id?: string
+          route_id: string
+          sequence: number
+        }
+        Update: {
+          arrival_eta?: string | null
+          created_at?: string
+          delivery_id?: string | null
+          id?: string
+          route_id?: string
+          sequence?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "route_stops_delivery_id_fkey"
+            columns: ["delivery_id"]
+            isOneToOne: false
+            referencedRelation: "deliveries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "route_stops_route_id_fkey"
+            columns: ["route_id"]
+            isOneToOne: false
+            referencedRelation: "routes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      routes: {
+        Row: {
+          created_at: string
+          driver_id: string | null
+          estimated_co2_kg: number
+          estimated_cost_usd: number
+          id: string
+          name: string
+          optimization_score: number
+          origin_warehouse_id: string | null
+          planned_for: string
+          status: string
+          total_distance_km: number
+          total_duration_min: number
+          updated_at: string
+          vehicle_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          driver_id?: string | null
+          estimated_co2_kg?: number
+          estimated_cost_usd?: number
+          id?: string
+          name: string
+          optimization_score?: number
+          origin_warehouse_id?: string | null
+          planned_for?: string
+          status?: string
+          total_distance_km?: number
+          total_duration_min?: number
+          updated_at?: string
+          vehicle_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          driver_id?: string | null
+          estimated_co2_kg?: number
+          estimated_cost_usd?: number
+          id?: string
+          name?: string
+          optimization_score?: number
+          origin_warehouse_id?: string | null
+          planned_for?: string
+          status?: string
+          total_distance_km?: number
+          total_duration_min?: number
+          updated_at?: string
+          vehicle_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routes_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routes_origin_warehouse_id_fkey"
+            columns: ["origin_warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routes_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          battery_pct: number | null
+          capacity_kg: number
+          created_at: string
+          current_lat: number | null
+          current_lng: number | null
+          driver_id: string | null
+          fuel_pct: number | null
+          fuel_type: string
+          home_warehouse_id: string | null
+          id: string
+          model: string
+          odometer_km: number
+          plate: string
+          status: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          battery_pct?: number | null
+          capacity_kg?: number
+          created_at?: string
+          current_lat?: number | null
+          current_lng?: number | null
+          driver_id?: string | null
+          fuel_pct?: number | null
+          fuel_type?: string
+          home_warehouse_id?: string | null
+          id?: string
+          model: string
+          odometer_km?: number
+          plate: string
+          status?: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          battery_pct?: number | null
+          capacity_kg?: number
+          created_at?: string
+          current_lat?: number | null
+          current_lng?: number | null
+          driver_id?: string | null
+          fuel_pct?: number | null
+          fuel_type?: string
+          home_warehouse_id?: string | null
+          id?: string
+          model?: string
+          odometer_km?: number
+          plate?: string
+          status?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicles_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicles_home_warehouse_id_fkey"
+            columns: ["home_warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      warehouses: {
+        Row: {
+          address: string
+          capacity_units: number
+          city: string
+          code: string
+          country: string
+          created_at: string
+          id: string
+          lat: number | null
+          lng: number | null
+          name: string
+          status: string
+          updated_at: string
+          used_units: number
+        }
+        Insert: {
+          address: string
+          capacity_units?: number
+          city: string
+          code: string
+          country?: string
+          created_at?: string
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          name: string
+          status?: string
+          updated_at?: string
+          used_units?: number
+        }
+        Update: {
+          address?: string
+          capacity_units?: number
+          city?: string
+          code?: string
+          country?: string
+          created_at?: string
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          name?: string
+          status?: string
+          updated_at?: string
+          used_units?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "dispatcher" | "fleet_manager"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +629,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "dispatcher", "fleet_manager"],
+    },
   },
 } as const
