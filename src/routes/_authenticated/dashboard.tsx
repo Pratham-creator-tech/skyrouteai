@@ -232,7 +232,7 @@ function Dashboard() {
               {scoreBuckets.map(b => (
                 <div key={b.bucket} className="rounded-md border bg-background/40 p-2 text-center">
                   <div className="font-mono text-sm font-semibold tabular-nums">{b.routes}</div>
-                  <div className="text-[10px] text-muted-foreground">{b.label}</div>
+                  <div className="text-[10px] text-muted-foreground">{b.bucket}</div>
                 </div>
               ))}
             </div>
