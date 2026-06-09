@@ -53,6 +53,33 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_decisions: {
+        Row: {
+          agent_name: string
+          created_at: string
+          decision: string
+          id: string
+          reasoning: string | null
+          timestamp: string
+        }
+        Insert: {
+          agent_name: string
+          created_at?: string
+          decision: string
+          id?: string
+          reasoning?: string | null
+          timestamp?: string
+        }
+        Update: {
+          agent_name?: string
+          created_at?: string
+          decision?: string
+          id?: string
+          reasoning?: string | null
+          timestamp?: string
+        }
+        Relationships: []
+      }
       ai_events: {
         Row: {
           action: string
@@ -103,15 +130,24 @@ export type Database = {
           dest_city: string | null
           dest_lat: number | null
           dest_lng: number | null
+          dropoff_latitude: number | null
+          dropoff_location: string | null
+          dropoff_longitude: number | null
+          estimated_cost: number | null
+          estimated_time: number | null
           eta: string | null
           id: string
           origin_warehouse_id: string | null
+          pickup_latitude: number | null
+          pickup_location: string | null
+          pickup_longitude: number | null
           priority: string
           scheduled_for: string | null
           status: string
           tracking_no: string
           updated_at: string
           vehicle_id: string | null
+          weight: number | null
           weight_kg: number
         }
         Insert: {
@@ -125,15 +161,24 @@ export type Database = {
           dest_city?: string | null
           dest_lat?: number | null
           dest_lng?: number | null
+          dropoff_latitude?: number | null
+          dropoff_location?: string | null
+          dropoff_longitude?: number | null
+          estimated_cost?: number | null
+          estimated_time?: number | null
           eta?: string | null
           id?: string
           origin_warehouse_id?: string | null
+          pickup_latitude?: number | null
+          pickup_location?: string | null
+          pickup_longitude?: number | null
           priority?: string
           scheduled_for?: string | null
           status?: string
           tracking_no: string
           updated_at?: string
           vehicle_id?: string | null
+          weight?: number | null
           weight_kg?: number
         }
         Update: {
@@ -147,15 +192,24 @@ export type Database = {
           dest_city?: string | null
           dest_lat?: number | null
           dest_lng?: number | null
+          dropoff_latitude?: number | null
+          dropoff_location?: string | null
+          dropoff_longitude?: number | null
+          estimated_cost?: number | null
+          estimated_time?: number | null
           eta?: string | null
           id?: string
           origin_warehouse_id?: string | null
+          pickup_latitude?: number | null
+          pickup_location?: string | null
+          pickup_longitude?: number | null
           priority?: string
           scheduled_for?: string | null
           status?: string
           tracking_no?: string
           updated_at?: string
           vehicle_id?: string | null
+          weight?: number | null
           weight_kg?: number
         }
         Relationships: [
@@ -177,33 +231,50 @@ export type Database = {
       }
       drivers: {
         Row: {
+          assigned_vehicle: string | null
           created_at: string
+          email: string | null
           full_name: string
           id: string
           license_no: string | null
+          name: string | null
           phone: string | null
           status: string
           updated_at: string
         }
         Insert: {
+          assigned_vehicle?: string | null
           created_at?: string
+          email?: string | null
           full_name: string
           id?: string
           license_no?: string | null
+          name?: string | null
           phone?: string | null
           status?: string
           updated_at?: string
         }
         Update: {
+          assigned_vehicle?: string | null
           created_at?: string
+          email?: string | null
           full_name?: string
           id?: string
           license_no?: string | null
+          name?: string | null
           phone?: string | null
           status?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "drivers_assigned_vehicle_fkey"
+            columns: ["assigned_vehicle"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -277,9 +348,12 @@ export type Database = {
       routes: {
         Row: {
           created_at: string
+          delivery_id: string | null
+          distance: number | null
           driver_id: string | null
           estimated_co2_kg: number
           estimated_cost_usd: number
+          fuel_cost: number | null
           id: string
           name: string
           optimization_score: number
@@ -288,14 +362,18 @@ export type Database = {
           status: string
           total_distance_km: number
           total_duration_min: number
+          travel_time: number | null
           updated_at: string
           vehicle_id: string | null
         }
         Insert: {
           created_at?: string
+          delivery_id?: string | null
+          distance?: number | null
           driver_id?: string | null
           estimated_co2_kg?: number
           estimated_cost_usd?: number
+          fuel_cost?: number | null
           id?: string
           name: string
           optimization_score?: number
@@ -304,14 +382,18 @@ export type Database = {
           status?: string
           total_distance_km?: number
           total_duration_min?: number
+          travel_time?: number | null
           updated_at?: string
           vehicle_id?: string | null
         }
         Update: {
           created_at?: string
+          delivery_id?: string | null
+          distance?: number | null
           driver_id?: string | null
           estimated_co2_kg?: number
           estimated_cost_usd?: number
+          fuel_cost?: number | null
           id?: string
           name?: string
           optimization_score?: number
@@ -320,10 +402,18 @@ export type Database = {
           status?: string
           total_distance_km?: number
           total_duration_min?: number
+          travel_time?: number | null
           updated_at?: string
           vehicle_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "routes_delivery_id_fkey"
+            columns: ["delivery_id"]
+            isOneToOne: false
+            referencedRelation: "deliveries"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "routes_driver_id_fkey"
             columns: ["driver_id"]
@@ -371,11 +461,14 @@ export type Database = {
       vehicles: {
         Row: {
           battery_pct: number | null
+          capacity: number | null
           capacity_kg: number
           created_at: string
           current_lat: number | null
           current_lng: number | null
+          current_location: string | null
           driver_id: string | null
+          fuel_efficiency: number | null
           fuel_pct: number | null
           fuel_type: string
           home_warehouse_id: string | null
@@ -386,14 +479,19 @@ export type Database = {
           status: string
           type: string
           updated_at: string
+          vehicle_number: string | null
+          vehicle_type: string | null
         }
         Insert: {
           battery_pct?: number | null
+          capacity?: number | null
           capacity_kg?: number
           created_at?: string
           current_lat?: number | null
           current_lng?: number | null
+          current_location?: string | null
           driver_id?: string | null
+          fuel_efficiency?: number | null
           fuel_pct?: number | null
           fuel_type?: string
           home_warehouse_id?: string | null
@@ -404,14 +502,19 @@ export type Database = {
           status?: string
           type?: string
           updated_at?: string
+          vehicle_number?: string | null
+          vehicle_type?: string | null
         }
         Update: {
           battery_pct?: number | null
+          capacity?: number | null
           capacity_kg?: number
           created_at?: string
           current_lat?: number | null
           current_lng?: number | null
+          current_location?: string | null
           driver_id?: string | null
+          fuel_efficiency?: number | null
           fuel_pct?: number | null
           fuel_type?: string
           home_warehouse_id?: string | null
@@ -422,6 +525,8 @@ export type Database = {
           status?: string
           type?: string
           updated_at?: string
+          vehicle_number?: string | null
+          vehicle_type?: string | null
         }
         Relationships: [
           {
@@ -450,11 +555,14 @@ export type Database = {
           created_at: string
           id: string
           lat: number | null
+          latitude: number | null
           lng: number | null
+          longitude: number | null
           name: string
           status: string
           updated_at: string
           used_units: number
+          warehouse_name: string | null
         }
         Insert: {
           address: string
@@ -465,11 +573,14 @@ export type Database = {
           created_at?: string
           id?: string
           lat?: number | null
+          latitude?: number | null
           lng?: number | null
+          longitude?: number | null
           name: string
           status?: string
           updated_at?: string
           used_units?: number
+          warehouse_name?: string | null
         }
         Update: {
           address?: string
@@ -480,11 +591,14 @@ export type Database = {
           created_at?: string
           id?: string
           lat?: number | null
+          latitude?: number | null
           lng?: number | null
+          longitude?: number | null
           name?: string
           status?: string
           updated_at?: string
           used_units?: number
+          warehouse_name?: string | null
         }
         Relationships: []
       }
