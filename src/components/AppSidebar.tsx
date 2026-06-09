@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, Zap, LogOut,
+  BrainCircuit, BarChart3, Settings, Zap, LogOut, MapPin,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+  { title: "Live Map", url: "/live-map", icon: MapPin },
   { title: "Deliveries", url: "/deliveries", icon: Package },
   { title: "Vehicles", url: "/vehicles", icon: Truck },
   { title: "Warehouses", url: "/warehouses", icon: Warehouse },
