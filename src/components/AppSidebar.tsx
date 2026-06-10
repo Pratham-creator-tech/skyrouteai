@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, Zap, LogOut, MapPin,
+  BrainCircuit, BarChart3, Settings, Zap, LogOut, MapPin, Sparkles,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
@@ -16,6 +16,7 @@ const NAV = [
   { title: "Vehicles", url: "/vehicles", icon: Truck },
   { title: "Warehouses", url: "/warehouses", icon: Warehouse },
   { title: "Route Planner", url: "/route-planner", icon: RouteIcon },
+  { title: "Optimizer", url: "/optimizer", icon: Sparkles },
   { title: "AI Control Center", url: "/ai-control", icon: BrainCircuit },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Settings", url: "/settings", icon: Settings },
