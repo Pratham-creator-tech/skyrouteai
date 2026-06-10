@@ -16,6 +16,7 @@ import { Route as AuthenticatedWarehousesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedVehiclesRouteImport } from './routes/_authenticated/vehicles'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedRoutePlannerRouteImport } from './routes/_authenticated/route-planner'
+import { Route as AuthenticatedOptimizerRouteImport } from './routes/_authenticated/optimizer'
 import { Route as AuthenticatedLiveMapRouteImport } from './routes/_authenticated/live-map'
 import { Route as AuthenticatedDeliveriesRouteImport } from './routes/_authenticated/deliveries'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -57,6 +58,11 @@ const AuthenticatedRoutePlannerRoute =
     path: '/route-planner',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedOptimizerRoute = AuthenticatedOptimizerRouteImport.update({
+  id: '/optimizer',
+  path: '/optimizer',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedLiveMapRoute = AuthenticatedLiveMapRouteImport.update({
   id: '/live-map',
   path: '/live-map',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
+  '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vehicles': typeof AuthenticatedVehiclesRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
+  '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vehicles': typeof AuthenticatedVehiclesRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/deliveries': typeof AuthenticatedDeliveriesRoute
   '/_authenticated/live-map': typeof AuthenticatedLiveMapRoute
+  '/_authenticated/optimizer': typeof AuthenticatedOptimizerRoute
   '/_authenticated/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/vehicles': typeof AuthenticatedVehiclesRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deliveries'
     | '/live-map'
+    | '/optimizer'
     | '/route-planner'
     | '/settings'
     | '/vehicles'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deliveries'
     | '/live-map'
+    | '/optimizer'
     | '/route-planner'
     | '/settings'
     | '/vehicles'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/deliveries'
     | '/_authenticated/live-map'
+    | '/_authenticated/optimizer'
     | '/_authenticated/route-planner'
     | '/_authenticated/settings'
     | '/_authenticated/vehicles'
@@ -224,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRoutePlannerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/optimizer': {
+      id: '/_authenticated/optimizer'
+      path: '/optimizer'
+      fullPath: '/optimizer'
+      preLoaderRoute: typeof AuthenticatedOptimizerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/live-map': {
       id: '/_authenticated/live-map'
       path: '/live-map'
@@ -268,6 +287,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeliveriesRoute: typeof AuthenticatedDeliveriesRoute
   AuthenticatedLiveMapRoute: typeof AuthenticatedLiveMapRoute
+  AuthenticatedOptimizerRoute: typeof AuthenticatedOptimizerRoute
   AuthenticatedRoutePlannerRoute: typeof AuthenticatedRoutePlannerRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedVehiclesRoute: typeof AuthenticatedVehiclesRoute
@@ -280,6 +300,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeliveriesRoute: AuthenticatedDeliveriesRoute,
   AuthenticatedLiveMapRoute: AuthenticatedLiveMapRoute,
+  AuthenticatedOptimizerRoute: AuthenticatedOptimizerRoute,
   AuthenticatedRoutePlannerRoute: AuthenticatedRoutePlannerRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedVehiclesRoute: AuthenticatedVehiclesRoute,
@@ -297,13 +318,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
