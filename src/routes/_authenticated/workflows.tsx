@@ -129,10 +129,17 @@ function WorkflowsPage() {
   );
 
   // Build a complete step list (fill in pending defaults for steps not yet inserted)
-  const pipelineSteps = useMemo(() => {
+  type PipelineStep = {
+    agent_key: string; agent_name: string; step_order: number; status: StepStatus;
+    decision?: string | null; reasoning?: string | null; output?: any;
+    started_at?: string | null; completed_at?: string | null; duration_ms?: number | null;
+  };
+  const pipelineSteps = useMemo<PipelineStep[]>(() => {
     const byKey = new Map((steps ?? []).map(s => [s.agent_key, s]));
-    return AGENT_PIPELINE.map(a => byKey.get(a.key) ?? {
-      agent_key: a.key, agent_name: a.name, step_order: a.order, status: "pending" as StepStatus,
+    return AGENT_PIPELINE.map(a => {
+      const found = byKey.get(a.key);
+      if (found) return { ...found, status: found.status as StepStatus };
+      return { agent_key: a.key, agent_name: a.name, step_order: a.order, status: "pending" as StepStatus };
     });
   }, [steps]);
 
