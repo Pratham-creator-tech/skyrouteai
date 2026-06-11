@@ -602,6 +602,106 @@ export type Database = {
         }
         Relationships: []
       }
+      workflow_executions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          current_step: string | null
+          delivery_id: string
+          id: string
+          started_at: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          current_step?: string | null
+          delivery_id: string
+          id?: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          current_step?: string | null
+          delivery_id?: string
+          id?: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_executions_delivery_id_fkey"
+            columns: ["delivery_id"]
+            isOneToOne: false
+            referencedRelation: "deliveries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workflow_steps: {
+        Row: {
+          agent_key: string
+          agent_name: string
+          completed_at: string | null
+          created_at: string
+          decision: string | null
+          duration_ms: number | null
+          execution_id: string
+          id: string
+          output: Json | null
+          reasoning: string | null
+          started_at: string | null
+          status: string
+          step_order: number
+          updated_at: string
+        }
+        Insert: {
+          agent_key: string
+          agent_name: string
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          duration_ms?: number | null
+          execution_id: string
+          id?: string
+          output?: Json | null
+          reasoning?: string | null
+          started_at?: string | null
+          status?: string
+          step_order: number
+          updated_at?: string
+        }
+        Update: {
+          agent_key?: string
+          agent_name?: string
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          duration_ms?: number | null
+          execution_id?: string
+          id?: string
+          output?: Json | null
+          reasoning?: string | null
+          started_at?: string | null
+          status?: string
+          step_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_steps_execution_id_fkey"
+            columns: ["execution_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_executions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
