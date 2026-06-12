@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/chat")({
         const result = streamText({
           model,
           system: `${SYSTEM_PROMPT}\n\nLIVE DATA SNAPSHOT (JSON):\n${snapshot}`,
-          messages: convertToModelMessages(messages as UIMessage[]),
+          messages: await convertToModelMessages(messages as UIMessage[]),
         });
 
         return result.toUIMessageStreamResponse({
