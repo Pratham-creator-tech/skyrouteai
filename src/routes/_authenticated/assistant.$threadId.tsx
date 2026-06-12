@@ -71,7 +71,7 @@ function AssistantPage() {
     () =>
       new DefaultChatTransport({
         api: "/api/chat",
-        headers: () => (authHeader ? { Authorization: authHeader } : {}),
+        headers: () => (authHeader ? { Authorization: authHeader } : ({} as Record<string, string>)),
         body: { threadId },
       }),
     [authHeader, threadId],
