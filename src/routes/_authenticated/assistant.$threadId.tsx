@@ -1,8 +1,7 @@
-import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import {
   Plus, Trash2, MessageSquare, Sparkles, BrainCircuit, Bot,
   TrendingDown, AlertTriangle, Truck, Leaf,
