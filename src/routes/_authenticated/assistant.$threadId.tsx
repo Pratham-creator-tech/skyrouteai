@@ -49,7 +49,7 @@ function AssistantPage() {
   const { threadId } = Route.useParams();
   const { initialMessages } = Route.useLoaderData();
   const navigate = useNavigate();
-  const router = useRouter();
+  
   const qc = useQueryClient();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
