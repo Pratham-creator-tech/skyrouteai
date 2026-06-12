@@ -1,5 +1,5 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { listThreads, createThread } from "@/lib/assistant.functions";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { listThreads } from "@/lib/assistant.functions";
 
 export const Route = createFileRoute("/_authenticated/assistant")({
   loader: async ({ context }) => {
