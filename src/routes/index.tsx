@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, BrainCircuit, Truck, Leaf, Route as RouteIcon,
-  ShieldCheck, Activity, Zap,
+  ShieldCheck, Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import logoImg from "@/assets/skyroute-logo.png";
+import heroBg from "@/assets/hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,13 +32,16 @@ const features = [
 function Landing() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="pointer-events-none absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
+      {/* Real hero background image */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_80%)]"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
 
       <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-2.5">
-          <div className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground">
-            <Zap className="h-4 w-4" />
-          </div>
+          <img src={logoImg} alt="SkyRoute AI logo" className="h-9 w-9 rounded-md object-cover" />
           <div className="font-display text-lg font-semibold tracking-tight">SkyRoute AI</div>
         </div>
         <div className="flex items-center gap-2">
