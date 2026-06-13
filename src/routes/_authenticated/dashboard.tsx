@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import {
   Package, Truck, Warehouse as WarehouseIcon, Leaf, Route as RouteIcon,
@@ -50,7 +51,35 @@ const STATUS_COLORS: Record<string, string> = {
 
 function Dashboard() {
   const { data, isLoading } = useDashboardData();
+  const navigate = useNavigate();
   if (isLoading || !data) return <LoadingShell />;
+
+  const exportReport = () => {
+    const rows: string[] = [];
+    rows.push("Section,Metric,Value");
+    rows.push(`KPI,Active Deliveries,${data.deliveries.filter(d => ["in_transit","assigned","pending"].includes(d.status)).length}`);
+    rows.push(`KPI,Vehicles On Route,${data.vehicles.filter(v => v.status === "in_transit").length}`);
+    rows.push(`KPI,Total Vehicles,${data.vehicles.length}`);
+    rows.push(`KPI,Warehouses,${data.warehouses.length}`);
+    rows.push(`KPI,Total Distance Km,${Math.round(data.routes.reduce((s, r) => s + Number(r.total_distance_km ?? 0), 0))}`);
+    rows.push(`KPI,Total Cost USD,${data.deliveries.reduce((s, d) => s + Number(d.cost_usd ?? 0), 0).toFixed(2)}`);
+    rows.push(`KPI,Total CO2 Kg,${data.deliveries.reduce((s, d) => s + Number(d.co2_kg ?? 0), 0).toFixed(2)}`);
+    rows.push("");
+    rows.push("Deliveries,id,status,priority,cost_usd,co2_kg,created_at");
+    for (const d of data.deliveries) {
+      rows.push(`Delivery,${d.id},${d.status},${d.priority ?? ""},${d.cost_usd ?? ""},${d.co2_kg ?? ""},${d.created_at ?? ""}`);
+    }
+    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `skyroute-report-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    toast.success("Report exported");
+  };
 
   // KPI math
   const activeDeliveries = data.deliveries.filter(d =>
@@ -120,8 +149,8 @@ function Dashboard() {
         subtitle="Real-time operations overview across deliveries, fleet, network, and AI."
         actions={
           <>
-            <Button variant="outline" size="sm">Export report</Button>
-            <Button size="sm" className="gap-2">
+            <Button variant="outline" size="sm" onClick={exportReport}>Export report</Button>
+            <Button size="sm" className="gap-2" onClick={() => navigate({ to: "/assistant" })}>
               <BrainCircuit className="h-4 w-4" /> Ask SkyRoute AI
             </Button>
           </>
