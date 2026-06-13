@@ -286,7 +286,7 @@ function CarbonCreditsPage() {
         <StatCard
           label="Green routes"
           value={`${greenRoutes.length}`}
-          icon={Route}
+          icon={RouteIcon}
           delta={{ value: `${greenRoutePct.toFixed(0)}% of total`, positive: greenRoutePct > 50 }}
         />
       </div>
