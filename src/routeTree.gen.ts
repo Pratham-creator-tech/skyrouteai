@@ -23,6 +23,7 @@ import { Route as AuthenticatedOptimizerRouteImport } from './routes/_authentica
 import { Route as AuthenticatedLiveMapRouteImport } from './routes/_authenticated/live-map'
 import { Route as AuthenticatedDeliveriesRouteImport } from './routes/_authenticated/deliveries'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCollaborationRouteImport } from './routes/_authenticated/collaboration'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAiControlRouteImport } from './routes/_authenticated/ai-control'
@@ -100,6 +101,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCollaborationRoute =
+  AuthenticatedCollaborationRouteImport.update({
+    id: '/collaboration',
+    path: '/collaboration',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
@@ -134,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/ai-control': typeof AuthenticatedAiControlRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/assistant': typeof AuthenticatedAssistantRouteWithChildren
+  '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
@@ -153,6 +161,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/ai-control': typeof AuthenticatedAiControlRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
@@ -175,6 +184,7 @@ export interface FileRoutesById {
   '/_authenticated/ai-control': typeof AuthenticatedAiControlRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRouteWithChildren
+  '/_authenticated/collaboration': typeof AuthenticatedCollaborationRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/deliveries': typeof AuthenticatedDeliveriesRoute
   '/_authenticated/live-map': typeof AuthenticatedLiveMapRoute
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/ai-control'
     | '/analytics'
     | '/assistant'
+    | '/collaboration'
     | '/dashboard'
     | '/deliveries'
     | '/live-map'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/ai-control'
     | '/analytics'
+    | '/collaboration'
     | '/dashboard'
     | '/deliveries'
     | '/live-map'
@@ -237,6 +249,7 @@ export interface FileRouteTypes {
     | '/_authenticated/ai-control'
     | '/_authenticated/analytics'
     | '/_authenticated/assistant'
+    | '/_authenticated/collaboration'
     | '/_authenticated/dashboard'
     | '/_authenticated/deliveries'
     | '/_authenticated/live-map'
@@ -359,6 +372,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/collaboration': {
+      id: '/_authenticated/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof AuthenticatedCollaborationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/assistant': {
       id: '/_authenticated/assistant'
       path: '/assistant'
@@ -417,6 +437,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAiControlRoute: typeof AuthenticatedAiControlRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRouteWithChildren
+  AuthenticatedCollaborationRoute: typeof AuthenticatedCollaborationRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeliveriesRoute: typeof AuthenticatedDeliveriesRoute
   AuthenticatedLiveMapRoute: typeof AuthenticatedLiveMapRoute
@@ -433,6 +454,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAiControlRoute: AuthenticatedAiControlRoute,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedAssistantRoute: AuthenticatedAssistantRouteWithChildren,
+  AuthenticatedCollaborationRoute: AuthenticatedCollaborationRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeliveriesRoute: AuthenticatedDeliveriesRoute,
   AuthenticatedLiveMapRoute: AuthenticatedLiveMapRoute,
@@ -457,13 +479,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
