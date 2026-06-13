@@ -23,7 +23,6 @@ const NAV = [
   { title: "Workflows", url: "/workflows", icon: Workflow },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Sustainability", url: "/sustainability", icon: Leaf },
-  { title: "Simulation", url: "/simulation", icon: Rocket },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
