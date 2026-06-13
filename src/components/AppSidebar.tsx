@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Rocket,
+  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
@@ -23,7 +23,6 @@ const NAV = [
   { title: "Workflows", url: "/workflows", icon: Workflow },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Sustainability", url: "/sustainability", icon: Leaf },
-  { title: "Simulation", url: "/simulation", icon: Rocket },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
