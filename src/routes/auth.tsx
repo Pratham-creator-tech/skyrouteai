@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,6 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
+import logoImg from "@/assets/skyroute-logo.png";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Sign in — SkyRoute AI" }] }),
@@ -67,7 +67,7 @@ function AuthPage() {
       <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-6 py-10 lg:grid-cols-2">
         <div className="hidden lg:block">
           <Link to="/" className="inline-flex items-center gap-2.5">
-            <div className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="h-4 w-4" /></div>
+            <img src={logoImg} alt="SkyRoute AI logo" className="h-9 w-9 rounded-md object-cover" />
             <div className="font-display text-lg font-semibold tracking-tight">SkyRoute AI</div>
           </Link>
           <h2 className="mt-12 font-display text-4xl font-semibold leading-tight tracking-tight">
@@ -85,7 +85,7 @@ function AuthPage() {
 
         <div className="mx-auto w-full max-w-md rounded-2xl border bg-card p-8 shadow-xl shadow-primary/5">
           <Link to="/" className="mb-6 inline-flex items-center gap-2.5 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="h-4 w-4" /></div>
+            <img src={logoImg} alt="SkyRoute AI logo" className="h-8 w-8 rounded-md object-cover" />
             <div className="font-display font-semibold">SkyRoute AI</div>
           </Link>
           <h1 className="font-display text-2xl font-semibold tracking-tight">Welcome back</h1>
