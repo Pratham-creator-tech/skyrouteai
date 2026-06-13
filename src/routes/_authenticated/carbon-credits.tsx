@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageHeader } from "@/components/PageHeader";
 import { StatCard } from "@/components/StatCard";
 import {
-  Leaf, TrendingDown, Route, Award, TreePine, BarChart3, Zap, Truck, Medal,
+  Leaf, TrendingDown, Route as RouteIcon, Award, TreePine, BarChart3, Zap, Truck, Medal,
 } from "lucide-react";
 import { format, subDays } from "date-fns";
 import { Progress } from "@/components/ui/progress";
