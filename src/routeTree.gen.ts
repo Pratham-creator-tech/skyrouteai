@@ -21,6 +21,7 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedRoutePlannerRouteImport } from './routes/_authenticated/route-planner'
 import { Route as AuthenticatedOptimizerRouteImport } from './routes/_authenticated/optimizer'
 import { Route as AuthenticatedLiveMapRouteImport } from './routes/_authenticated/live-map'
+import { Route as AuthenticatedDigitalTwinRouteImport } from './routes/_authenticated/digital-twin'
 import { Route as AuthenticatedDeliveriesRouteImport } from './routes/_authenticated/deliveries'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCollaborationRouteImport } from './routes/_authenticated/collaboration'
@@ -91,6 +92,12 @@ const AuthenticatedLiveMapRoute = AuthenticatedLiveMapRouteImport.update({
   path: '/live-map',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDigitalTwinRoute =
+  AuthenticatedDigitalTwinRouteImport.update({
+    id: '/digital-twin',
+    path: '/digital-twin',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDeliveriesRoute = AuthenticatedDeliveriesRouteImport.update({
   id: '/deliveries',
   path: '/deliveries',
@@ -144,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
+  '/digital-twin': typeof AuthenticatedDigitalTwinRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
   '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
@@ -164,6 +172,7 @@ export interface FileRoutesByTo {
   '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
+  '/digital-twin': typeof AuthenticatedDigitalTwinRoute
   '/live-map': typeof AuthenticatedLiveMapRoute
   '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
@@ -187,6 +196,7 @@ export interface FileRoutesById {
   '/_authenticated/collaboration': typeof AuthenticatedCollaborationRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/deliveries': typeof AuthenticatedDeliveriesRoute
+  '/_authenticated/digital-twin': typeof AuthenticatedDigitalTwinRoute
   '/_authenticated/live-map': typeof AuthenticatedLiveMapRoute
   '/_authenticated/optimizer': typeof AuthenticatedOptimizerRoute
   '/_authenticated/route-planner': typeof AuthenticatedRoutePlannerRoute
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
     | '/collaboration'
     | '/dashboard'
     | '/deliveries'
+    | '/digital-twin'
     | '/live-map'
     | '/optimizer'
     | '/route-planner'
@@ -230,6 +241,7 @@ export interface FileRouteTypes {
     | '/collaboration'
     | '/dashboard'
     | '/deliveries'
+    | '/digital-twin'
     | '/live-map'
     | '/optimizer'
     | '/route-planner'
@@ -252,6 +264,7 @@ export interface FileRouteTypes {
     | '/_authenticated/collaboration'
     | '/_authenticated/dashboard'
     | '/_authenticated/deliveries'
+    | '/_authenticated/digital-twin'
     | '/_authenticated/live-map'
     | '/_authenticated/optimizer'
     | '/_authenticated/route-planner'
@@ -358,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLiveMapRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/digital-twin': {
+      id: '/_authenticated/digital-twin'
+      path: '/digital-twin'
+      fullPath: '/digital-twin'
+      preLoaderRoute: typeof AuthenticatedDigitalTwinRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/deliveries': {
       id: '/_authenticated/deliveries'
       path: '/deliveries'
@@ -440,6 +460,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCollaborationRoute: typeof AuthenticatedCollaborationRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeliveriesRoute: typeof AuthenticatedDeliveriesRoute
+  AuthenticatedDigitalTwinRoute: typeof AuthenticatedDigitalTwinRoute
   AuthenticatedLiveMapRoute: typeof AuthenticatedLiveMapRoute
   AuthenticatedOptimizerRoute: typeof AuthenticatedOptimizerRoute
   AuthenticatedRoutePlannerRoute: typeof AuthenticatedRoutePlannerRoute
@@ -457,6 +478,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCollaborationRoute: AuthenticatedCollaborationRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeliveriesRoute: AuthenticatedDeliveriesRoute,
+  AuthenticatedDigitalTwinRoute: AuthenticatedDigitalTwinRoute,
   AuthenticatedLiveMapRoute: AuthenticatedLiveMapRoute,
   AuthenticatedOptimizerRoute: AuthenticatedOptimizerRoute,
   AuthenticatedRoutePlannerRoute: AuthenticatedRoutePlannerRoute,
