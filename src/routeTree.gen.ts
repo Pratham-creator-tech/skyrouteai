@@ -25,6 +25,7 @@ import { Route as AuthenticatedDigitalTwinRouteImport } from './routes/_authenti
 import { Route as AuthenticatedDeliveriesRouteImport } from './routes/_authenticated/deliveries'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCollaborationRouteImport } from './routes/_authenticated/collaboration'
+import { Route as AuthenticatedCarbonCreditsRouteImport } from './routes/_authenticated/carbon-credits'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAiControlRouteImport } from './routes/_authenticated/ai-control'
@@ -114,6 +115,12 @@ const AuthenticatedCollaborationRoute =
     path: '/collaboration',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedCarbonCreditsRoute =
+  AuthenticatedCarbonCreditsRouteImport.update({
+    id: '/carbon-credits',
+    path: '/carbon-credits',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
@@ -148,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/ai-control': typeof AuthenticatedAiControlRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/assistant': typeof AuthenticatedAssistantRouteWithChildren
+  '/carbon-credits': typeof AuthenticatedCarbonCreditsRoute
   '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
@@ -169,6 +177,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/ai-control': typeof AuthenticatedAiControlRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/carbon-credits': typeof AuthenticatedCarbonCreditsRoute
   '/collaboration': typeof AuthenticatedCollaborationRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/deliveries': typeof AuthenticatedDeliveriesRoute
@@ -193,6 +202,7 @@ export interface FileRoutesById {
   '/_authenticated/ai-control': typeof AuthenticatedAiControlRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRouteWithChildren
+  '/_authenticated/carbon-credits': typeof AuthenticatedCarbonCreditsRoute
   '/_authenticated/collaboration': typeof AuthenticatedCollaborationRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/deliveries': typeof AuthenticatedDeliveriesRoute
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/ai-control'
     | '/analytics'
     | '/assistant'
+    | '/carbon-credits'
     | '/collaboration'
     | '/dashboard'
     | '/deliveries'
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/ai-control'
     | '/analytics'
+    | '/carbon-credits'
     | '/collaboration'
     | '/dashboard'
     | '/deliveries'
@@ -261,6 +273,7 @@ export interface FileRouteTypes {
     | '/_authenticated/ai-control'
     | '/_authenticated/analytics'
     | '/_authenticated/assistant'
+    | '/_authenticated/carbon-credits'
     | '/_authenticated/collaboration'
     | '/_authenticated/dashboard'
     | '/_authenticated/deliveries'
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCollaborationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/carbon-credits': {
+      id: '/_authenticated/carbon-credits'
+      path: '/carbon-credits'
+      fullPath: '/carbon-credits'
+      preLoaderRoute: typeof AuthenticatedCarbonCreditsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/assistant': {
       id: '/_authenticated/assistant'
       path: '/assistant'
@@ -457,6 +477,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAiControlRoute: typeof AuthenticatedAiControlRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRouteWithChildren
+  AuthenticatedCarbonCreditsRoute: typeof AuthenticatedCarbonCreditsRoute
   AuthenticatedCollaborationRoute: typeof AuthenticatedCollaborationRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeliveriesRoute: typeof AuthenticatedDeliveriesRoute
@@ -475,6 +496,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAiControlRoute: AuthenticatedAiControlRoute,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedAssistantRoute: AuthenticatedAssistantRouteWithChildren,
+  AuthenticatedCarbonCreditsRoute: AuthenticatedCarbonCreditsRoute,
   AuthenticatedCollaborationRoute: AuthenticatedCollaborationRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeliveriesRoute: AuthenticatedDeliveriesRoute,

@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Users, Boxes,
+  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Users, Boxes, Award,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
@@ -24,6 +24,7 @@ const NAV = [
   { title: "AI Assistant", url: "/assistant", icon: MessagesSquare },
   { title: "Workflows", url: "/workflows", icon: Workflow },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
+  { title: "Carbon Credits", url: "/carbon-credits", icon: Award },
   { title: "Sustainability", url: "/sustainability", icon: Leaf },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
