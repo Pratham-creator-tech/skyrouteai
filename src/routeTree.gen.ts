@@ -16,6 +16,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkflowsRouteImport } from './routes/_authenticated/workflows'
 import { Route as AuthenticatedWarehousesRouteImport } from './routes/_authenticated/warehouses'
 import { Route as AuthenticatedVehiclesRouteImport } from './routes/_authenticated/vehicles'
+import { Route as AuthenticatedSustainabilityRouteImport } from './routes/_authenticated/sustainability'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedRoutePlannerRouteImport } from './routes/_authenticated/route-planner'
 import { Route as AuthenticatedOptimizerRouteImport } from './routes/_authenticated/optimizer'
@@ -62,6 +63,12 @@ const AuthenticatedVehiclesRoute = AuthenticatedVehiclesRouteImport.update({
   path: '/vehicles',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSustainabilityRoute =
+  AuthenticatedSustainabilityRouteImport.update({
+    id: '/sustainability',
+    path: '/sustainability',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -133,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/sustainability': typeof AuthenticatedSustainabilityRoute
   '/vehicles': typeof AuthenticatedVehiclesRoute
   '/warehouses': typeof AuthenticatedWarehousesRoute
   '/workflows': typeof AuthenticatedWorkflowsRoute
@@ -151,6 +159,7 @@ export interface FileRoutesByTo {
   '/optimizer': typeof AuthenticatedOptimizerRoute
   '/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/sustainability': typeof AuthenticatedSustainabilityRoute
   '/vehicles': typeof AuthenticatedVehiclesRoute
   '/warehouses': typeof AuthenticatedWarehousesRoute
   '/workflows': typeof AuthenticatedWorkflowsRoute
@@ -172,6 +181,7 @@ export interface FileRoutesById {
   '/_authenticated/optimizer': typeof AuthenticatedOptimizerRoute
   '/_authenticated/route-planner': typeof AuthenticatedRoutePlannerRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/sustainability': typeof AuthenticatedSustainabilityRoute
   '/_authenticated/vehicles': typeof AuthenticatedVehiclesRoute
   '/_authenticated/warehouses': typeof AuthenticatedWarehousesRoute
   '/_authenticated/workflows': typeof AuthenticatedWorkflowsRoute
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/optimizer'
     | '/route-planner'
     | '/settings'
+    | '/sustainability'
     | '/vehicles'
     | '/warehouses'
     | '/workflows'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/optimizer'
     | '/route-planner'
     | '/settings'
+    | '/sustainability'
     | '/vehicles'
     | '/warehouses'
     | '/workflows'
@@ -231,6 +243,7 @@ export interface FileRouteTypes {
     | '/_authenticated/optimizer'
     | '/_authenticated/route-planner'
     | '/_authenticated/settings'
+    | '/_authenticated/sustainability'
     | '/_authenticated/vehicles'
     | '/_authenticated/warehouses'
     | '/_authenticated/workflows'
@@ -295,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/vehicles'
       fullPath: '/vehicles'
       preLoaderRoute: typeof AuthenticatedVehiclesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sustainability': {
+      id: '/_authenticated/sustainability'
+      path: '/sustainability'
+      fullPath: '/sustainability'
+      preLoaderRoute: typeof AuthenticatedSustainabilityRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
@@ -403,6 +423,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedOptimizerRoute: typeof AuthenticatedOptimizerRoute
   AuthenticatedRoutePlannerRoute: typeof AuthenticatedRoutePlannerRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedSustainabilityRoute: typeof AuthenticatedSustainabilityRoute
   AuthenticatedVehiclesRoute: typeof AuthenticatedVehiclesRoute
   AuthenticatedWarehousesRoute: typeof AuthenticatedWarehousesRoute
   AuthenticatedWorkflowsRoute: typeof AuthenticatedWorkflowsRoute
@@ -418,6 +439,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOptimizerRoute: AuthenticatedOptimizerRoute,
   AuthenticatedRoutePlannerRoute: AuthenticatedRoutePlannerRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedSustainabilityRoute: AuthenticatedSustainabilityRoute,
   AuthenticatedVehiclesRoute: AuthenticatedVehiclesRoute,
   AuthenticatedWarehousesRoute: AuthenticatedWarehousesRoute,
   AuthenticatedWorkflowsRoute: AuthenticatedWorkflowsRoute,
