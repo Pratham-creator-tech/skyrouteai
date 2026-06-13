@@ -7,8 +7,8 @@ import {
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
   SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
-  Collapsible, CollapsibleTrigger, CollapsibleContent,
 } from "@/components/ui/sidebar";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { supabase } from "@/integrations/supabase/client";
 import logoImg from "@/assets/skyroute-logo.png";
 
