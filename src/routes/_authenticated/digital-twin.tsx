@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/digital-twin")({
   head: () => ({ meta: [{ title: "Digital Twin — SkyRoute AI" }] }),
+  ssr: false,
   component: DigitalTwinPage,
 });
 
