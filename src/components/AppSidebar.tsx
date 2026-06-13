@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Users,
+  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Users, Boxes,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
@@ -13,6 +13,7 @@ import logoImg from "@/assets/skyroute-logo.png";
 const NAV = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Live Map", url: "/live-map", icon: MapPin },
+  { title: "Digital Twin", url: "/digital-twin", icon: Boxes },
   { title: "Deliveries", url: "/deliveries", icon: Package },
   { title: "Vehicles", url: "/vehicles", icon: Truck },
   { title: "Warehouses", url: "/warehouses", icon: Warehouse },
