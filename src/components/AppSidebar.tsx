@@ -1,13 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard, Package, Truck, Warehouse, Route as RouteIcon,
-  BrainCircuit, BarChart3, Settings, Zap, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Rocket,
+  BrainCircuit, BarChart3, Settings, LogOut, MapPin, Sparkles, Workflow, MessagesSquare, Leaf, Rocket,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
   SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
 } from "@/components/ui/sidebar";
 import { supabase } from "@/integrations/supabase/client";
+import logoImg from "@/assets/skyroute-logo.png";
 
 const NAV = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -35,9 +36,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r">
       <SidebarHeader className="border-b">
         <Link to="/dashboard" className="flex items-center gap-2.5 px-2 py-2">
-          <div className="relative grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
-            <Zap className="h-4 w-4" />
-          </div>
+          <img src={logoImg} alt="SkyRoute AI" className="h-8 w-8 rounded-md object-cover" />
           {!collapsed && (
             <div className="leading-tight">
               <div className="font-display text-sm font-semibold">SkyRoute AI</div>
