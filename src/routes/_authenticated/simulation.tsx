@@ -130,6 +130,7 @@ function SimulationPage() {
       // 500 deliveries (batched)
       const dRows = Array.from({ length: 500 }).map((_, i) => {
         const wh = whs![i % whs!.length];
+        const cityMeta = CITIES[i % CITIES.length];
         const destLat = Number(wh.lat) + rnd(-1.5, 1.5);
         const destLng = Number(wh.lng) + rnd(-1.5, 1.5);
         return {
@@ -137,7 +138,7 @@ function SimulationPage() {
           customer_name: `${pick(FIRST)} ${pick(LAST)}`,
           origin_warehouse_id: wh.id,
           dest_address: `${Math.floor(rnd(100, 9999))} Market St`,
-          dest_city: CITIES.find(c => c.code.startsWith(wh.code.split("-")[0]))?.city ?? "Unknown",
+          dest_city: cityMeta.city,
           dest_lat: destLat, dest_lng: destLng,
           weight_kg: +rnd(0.5, 25).toFixed(2),
           priority: pick(PRIORITIES),
